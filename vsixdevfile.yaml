@@ -14,4 +14,4 @@ spec:
     - image: eclipse/che-remote-plugin-runner-java8:7.3.0
       memoryLimit: 512Mi
   extensions:
-    - https://github.com/zacanbrcom/che7-devfile/raw/master/cobol-language-support-0.9.0.vsix
+    - https://github.com/zacanbrcom/che7-devfile/raw/master/cobol-language-support-0.9.1.vsix
