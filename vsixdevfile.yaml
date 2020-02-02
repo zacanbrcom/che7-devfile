@@ -1,7 +1,7 @@
 apiVersion: v2
 publisher: BroadcomMFD
 name: cobol-language-support
-version: 0.9.1
+version: 0.10.0
 type: VS Code extension
 displayName: COBOL Language Support
 title: COBOL Language Support
@@ -14,4 +14,5 @@ spec:
     - image: eclipse/che-remote-plugin-runner-java8:7.3.0
       memoryLimit: 512Mi
   extensions:
-    - https://github.com/zacanbrcom/che7-devfile/raw/master/cobol-language-support-0.9.1.vsix
+    - https://github.com/zacanbrcom/che7-devfile/raw/master/cobol-language-support-0.10.0.vsix
+    
