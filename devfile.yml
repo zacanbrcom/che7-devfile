@@ -12,7 +12,7 @@ components:
     reference: >-
       https://github.com/eclipse/che-che4z/raw/1.0.0/plugins/explorer-for-endevor.yaml
     alias: explorer-for-endevor
-  - id: eclipse/che-theia/7.3.0
+  - id: eclipse/che-theia/latest
     type: cheEditor
   - mountSources: true
     referenceContent: |-
