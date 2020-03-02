@@ -14,5 +14,5 @@ spec:
     - image:  quay.io/eclipse/che-sidecar-java:11-f76ca45
       memoryLimit: 512Mi
   extensions:
-    - https://github.com/zacanbrcom/che7-devfile/raw/master/cobol-lsp-vscode-extension/cobol-language-support-0.15.0.vsix
+    - https://github.com/zacanbrcom/che7-devfile/raw/master/cobol-lsp-vscode-extension/cobol-language-support-0.16.0.vsix
     
