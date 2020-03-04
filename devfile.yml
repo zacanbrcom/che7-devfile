@@ -35,7 +35,7 @@ components:
            - name: THEIA_PLUGINS
              value: local-dir:///plugins
            - name: ZOWE_CLI_HOME
-             value: /home/user/.zowe
+             value: /projects/.zowe
            name: cli
            resources:
             limits:
