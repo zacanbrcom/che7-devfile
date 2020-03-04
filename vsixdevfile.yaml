@@ -13,6 +13,9 @@ spec:
   containers:
     - image:  quay.io/eclipse/che-sidecar-java:11-f76ca45
       memoryLimit: 512Mi
+      env: 
+         - name: ZOWE_CLI_HOME
+           value: /projects/.zowe
   extensions:
     - https://github.com/zacanbrcom/che7-devfile/raw/master/cobol-lsp-vscode-extension/cobol-language-support-0.17.0.vsix
     
