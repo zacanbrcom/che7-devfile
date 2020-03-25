@@ -21,7 +21,7 @@ components:
        - 
         apiVersion: v1
         kind: Pod
-        metadata:
+              metadata:
          name: zowe
         spec:
          volumes:
@@ -29,13 +29,13 @@ components:
             persistentVolumeClaim:
               claimName: zowe-claim
          containers:
-          - 
-           image: 'ca-docker-brightside-docker.bintray.io/cli-mainframe-basic-stack:2019-11-07T13-32-56'
-           env: 
-           - name: THEIA_PLUGINS
-             value: local-dir:///plugins
-           - name: ZOWE_CLI_HOME
-             value: /projects/.zowe
+          -
+           image: 'ca-docker-brightside-docker.bintray.io/cli-mainframe-basic-stack:2019-11-19T15-56-35'
+           env:
+            - name: THEIA_PLUGINS
+              value: local-dir:///plugins
+            - name: ZOWE_CLI_HOME
+              value: /home/user/.zowe
            name: cli
            resources:
             limits:
@@ -44,6 +44,14 @@ components:
             - mountPath: /projects
               name: projects
             - mountPath: /home/user/.zowe
+              name: zowe
+         initContainers:
+          -
+           name: plugin-container
+           image: 'ca-docker-brightside-docker.bintray.io/cli-mainframe-basic-plugins:2019-11-19T15-56-35'
+           command: ["/bin/sh", "-c", "if [ -z \"$(ls -1A /.zowe)\" ]; then cp -r /.zowe_init/* /.zowe; fi"]
+           volumeMounts:
+            - mountPath: /.zowe
               name: zowe
        -
         apiVersion: v1
