@@ -1,24 +1,23 @@
 metadata:
-  name: MyMainframetack
+  name: che4z-ptowz
 components:
   - type: chePlugin
     reference: >-
       https://raw.githubusercontent.com/zacanbrcom/che7-devfile/master/vsixdevfile.yaml
     alias: cobol-language-support
-  - type: chePlugin
-    reference: 'https://github.com/eclipse/che-che4z/raw/1.0.0/plugins/cobol.yaml'
-    alias: cobol
-  - type: chePlugin
-    reference: >-
-      https://github.com/eclipse/che-che4z/raw/1.0.0/plugins/explorer-for-endevor.yaml
-    alias: explorer-for-endevor
-  - id: eclipse/che-theia/7.3.3
-    type: cheEditor
+  - id: bitlang/cobol/latest
+    type: chePlugin
+  - id: broadcommfd/explorer-for-endevor/latest
+    type: chePlugin
+  - id: broadcommfd/debugger-for-mainframe/latest
+    type: chePlugin
+  - id: broadcommfd/hlasm-language-support/latest
+    type: chePlugin
   - mountSources: true
-    referenceContent: |-
+    referenceContent: |
       kind: List
       items:
-       - 
+       -
         apiVersion: v1
         kind: Pod
         metadata:
@@ -29,13 +28,13 @@ components:
             persistentVolumeClaim:
               claimName: zowe-claim
          containers:
-          - 
-           image: 'ca-docker-brightside-docker.bintray.io/cli-mainframe-basic-stack:2020-02-13T23-41-08'
-           env: 
-           - name: THEIA_PLUGINS
-             value: local-dir:///plugins
-           - name: ZOWE_CLI_HOME
-             value: /projects/.zowe
+          -
+           image: 'ca-docker-brightside-docker.bintray.io/cli-mainframe-basic-stack:2019-11-19T15-56-35'
+           env:
+            - name: THEIA_PLUGINS
+              value: local-dir:///plugins
+            - name: ZOWE_CLI_HOME
+              value: /home/user/.zowe
            name: cli
            resources:
             limits:
