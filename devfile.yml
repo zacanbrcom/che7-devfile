@@ -3,7 +3,7 @@ metadata:
 components:
   - type: chePlugin
     reference: >-
-      https://raw.githubusercontent.com/zacanbrcom/che7-devfile/master/vsixdevfile.yaml
+      https://raw.githubusercontent.com/zacanbrcom/che7-devfile/local-path/vsixdevfile.yaml
     alias: cobol-language-support
   - type: chePlugin
     reference: 'https://github.com/eclipse/che-che4z/raw/1.0.0/plugins/cobol.yaml'
