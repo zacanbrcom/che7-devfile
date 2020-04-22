@@ -3,7 +3,7 @@ metadata:
 components:
   - type: chePlugin
     reference: >-
-      https://raw.githubusercontent.com/zacanbrcom/che7-devfile/master/vsixdevfile.yaml
+      https://raw.githubusercontent.com/zacanbrcom/che7-devfile/release-0.11.1/vsixdevfile.yaml
     alias: cobol-language-support
   - type: chePlugin
     reference: 'https://github.com/eclipse/che-che4z/raw/1.0.0/plugins/cobol.yaml'
@@ -15,10 +15,10 @@ components:
   - id: eclipse/che-theia/7.3.3
     type: cheEditor
   - mountSources: true
-    referenceContent: |-
+    referenceContent: |
       kind: List
       items:
-       - 
+       -
         apiVersion: v1
         kind: Pod
         metadata:
@@ -28,14 +28,29 @@ components:
           - name: zowe
             persistentVolumeClaim:
               claimName: zowe-claim
+          - name: keystore
+            persistentVolumeClaim:
+              claimName: keystore-claim
          containers:
-          - 
-           image: 'ca-docker-brightside-docker.bintray.io/cli-mainframe-basic-stack:2020-02-13T23-41-08'
-           env: 
-           - name: THEIA_PLUGINS
-             value: local-dir:///plugins
-           - name: ZOWE_CLI_HOME
-             value: /projects/.zowe
+          -
+           image: 'docker-release-candidate-local.artifactory-lvn.broadcom.net/zowe-explorer-plugin:2020-03-18T12-56-38'
+           env:
+            - name: THEIA_PLUGINS
+              value: local-dir:///plugins
+           name: zowe-explorer
+           resources:
+            limits:
+             memory: 512Mi
+           volumeMounts:
+            - mountPath: /home/theia/.zowe
+              name: zowe
+            - mountPath: /home/theia/.local/share/keyrings
+              name: keystore
+          -
+           image: 'docker-release-candidate-local.artifactory-lvn.broadcom.net/cli-mainframe-basic-stack:2020-03-06T15-55-37'
+           env:
+            - name: ZOWE_CLI_HOME
+              value: /home/user/.zowe
            name: cli
            resources:
             limits:
@@ -45,14 +60,27 @@ components:
               name: projects
             - mountPath: /home/user/.zowe
               name: zowe
+            - mountPath: /home/user/.local/share/keyrings
+              name: keystore
          initContainers:
           -
            name: plugin-container
-           image: 'ca-docker-brightside-docker.bintray.io/cli-mainframe-basic-plugins:2019-11-19T15-56-35'
+           image: 'docker-release-candidate-local.artifactory-lvn.broadcom.net/cli-mainframe-basic-plugins:2020-03-06T15-55-37'
            command: ["/bin/sh", "-c", "if [ -z \"$(ls -1A /.zowe)\" ]; then cp -r /.zowe_init/* /.zowe; fi"]
            volumeMounts:
             - mountPath: /.zowe
               name: zowe
+       -
+        apiVersion: v1
+        kind: PersistentVolumeClaim
+        metadata:
+         name: keystore-claim
+        spec:
+         accessModes:
+          - ReadWriteOnce
+         resources:
+           requests:
+             storage: 16Mi
        -
         apiVersion: v1
         kind: PersistentVolumeClaim
