@@ -17,5 +17,5 @@ spec:
          - name: ZOWE_CLI_HOME
            value: /projects/.zowe
   extensions:
-    - https://github.com/zacanbrcom/che7-devfile/blob/master/cobol-lsp-vscode-extension/cobol-language-support-0.11.1-release.vsix
+    - https://github.com/zacanbrcom/che7-devfile/blob/master/cobol-lsp-vscode-extension/cobol-language-support-0.12.0.vsix
     
